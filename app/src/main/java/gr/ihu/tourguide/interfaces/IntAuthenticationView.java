@@ -1,6 +1,6 @@
 package gr.ihu.tourguide.interfaces;
 
-public interface IntUserView extends IntView{
+public interface IntAuthenticationView extends IntView{
     /**
      * Display user-related information.
      *

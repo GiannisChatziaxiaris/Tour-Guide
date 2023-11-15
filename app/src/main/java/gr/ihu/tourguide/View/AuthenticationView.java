@@ -1,8 +1,8 @@
 package gr.ihu.tourguide.View;
 
-import gr.ihu.tourguide.interfaces.IntUserView;
+import gr.ihu.tourguide.interfaces.IntAuthenticationView;
 
-public class UserView implements IntUserView {
+public class AuthenticationView implements IntAuthenticationView {
 
     @Override
     public void showUserInfo(String username) {
