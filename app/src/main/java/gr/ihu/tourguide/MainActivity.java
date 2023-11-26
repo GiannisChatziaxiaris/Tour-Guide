@@ -39,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
                         // Navigate to the signup screen
                         Intent intent = new Intent(MainActivity.this, SignupActivity.class);
                         startActivity(intent);
-            }
+                    }
 
+                });
+            }
         });
-    }
+    };
 }
