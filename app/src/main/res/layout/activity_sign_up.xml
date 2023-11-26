@@ -45,7 +45,7 @@
                 android:padding="8dp"></EditText>
 
             <EditText
-                android:id="@+id/signup_confirm"
+                android:id="@+id/signup_password_confirm"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
