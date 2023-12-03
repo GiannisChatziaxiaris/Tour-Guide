@@ -4,48 +4,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MapActivity">
+    android:layout_height="match_parent">
 
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/mapContainer"
+    <fragment
+        android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="424dp"
-        android:layout_height="640dp"
-
-        android:layout_marginTop="96dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/placeDetailsTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#66FFFFFF"
-        android:padding="16dp"
-        android:text="Place Details"
-        android:textColor="#000000"
-        android:textSize="16sp"/>
+        android:layout_height="match_parent"
+        tools:context=".MapsActivity"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
-    <TextView
-        android:id="@+id/clickedPlaceDetailsTextView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/placeDetailsTextView"
-        android:background="#66FFFFFF"
-        android:padding="16dp"
-        android:text="Clicked Place Details"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="-6dp"
-        tools:layout_editor_absoluteY="42dp" />
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:elevation="10dp"
+        android:background="@drawable/white_border"
+        android:id="@+id/relLayout1">
+
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:id="@+id/ic_magnify"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_magnify"/>
+
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/ic_magnify"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:id="@+id/input_search"
+            android:background="@null"
+            android:hint="Enter Address, City or Zip Code"
+            />
+
+        <ImageView
+            android:id="@+id/ic_gps"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_gps" />
+
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
