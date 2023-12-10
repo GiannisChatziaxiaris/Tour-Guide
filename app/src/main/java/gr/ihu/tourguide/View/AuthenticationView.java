@@ -22,15 +22,15 @@ public class AuthenticationView implements IntAuthenticationView {
 
     @Override
     public void showSignUpScreen() {
-        buttonSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Navigate to the signup screen
-                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
-                startActivity(intent);
-            }
-
-        });
+//        buttonSignup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                 Navigate to the signup screen
+//                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+//                startActivity(intent);
+//            }
+//
+//        });
     }
 
     private void startActivity(Intent intent) {

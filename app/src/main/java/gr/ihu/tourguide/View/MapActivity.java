@@ -92,7 +92,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private com.example.googlemapsgoogleplaces.PlaceAutocompleteAdapter mPlaceAutoCompleteAdapter;
+    private gr.ihu.tourguide.View.PlaceAutocompleteAdapter mPlaceAutoCompleteAdapter;
     private GoogleApiClient mGoogleApiClient;
 
 
@@ -116,7 +116,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 .enableAutoManage(this, this)
                 .build();
 
-        mPlaceAutoCompleteAdapter = new com.example.googlemapsgoogleplaces.PlaceAutocompleteAdapter(this, mGoogleApiClient ,
+        mPlaceAutoCompleteAdapter = new gr.ihu.tourguide.View.PlaceAutocompleteAdapter(this, mGoogleApiClient ,
                 LAT_LNG_BOUNDS,null);
 
         mSearchText.setAdapter(mPlaceAutoCompleteAdapter);

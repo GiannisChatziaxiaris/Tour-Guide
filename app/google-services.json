@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1046872669382",
+    "project_id": "project-database-42bd5",
+    "storage_bucket": "project-database-42bd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046872669382:android:64dccc886d12726f39ebc7",
+        "android_client_info": {
+          "package_name": "gr.ihu.tourguide"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7AkMyca2a80-tCFsKBKI1RnvR4eg1-T0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
