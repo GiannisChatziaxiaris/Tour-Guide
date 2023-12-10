@@ -35,6 +35,9 @@
             android:value="@integer/google_play_services_version"/>
 >>>>>>> origin/GoogleMapsVersion2
         <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
