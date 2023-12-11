@@ -34,7 +34,7 @@
             android:name=".Login"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".View.MapActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,10 +43,10 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".View.MapActivity">
-
-        </activity>
+<!--        <activity-->
+<!--            android:name=".View.MapActivity">-->
+<!---->
+<!--        </activity>-->
 
     </application>
 
