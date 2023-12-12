@@ -42,59 +42,53 @@ public class SignUpActivity extends AppCompatActivity {
         textViewLogin = findViewById(R.id.loginRedirectText);
         signupButton = findViewById(R.id.signup_button);
 
-        textViewLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),Login.class);
-                startActivity(intent);
-                finish();
+        textViewLogin.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(),Login.class);
+            startActivity(intent);
+            finish();
 
-            }
         });
 
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email,password,passwordConfirm;
-                email = editTextEmail.getText().toString();
-                password = editTextPassword.getText().toString();
-                passwordConfirm = editTextPasswordConfirm.getText().toString();
+        signupButton.setOnClickListener(view -> {
+            String email,password,passwordConfirm;
+            email = editTextEmail.getText().toString();
+            password = editTextPassword.getText().toString();
+            passwordConfirm = editTextPasswordConfirm.getText().toString();
 
-                if(TextUtils.isEmpty(email)){
-                    Toast.makeText(SignUpActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if(TextUtils.isEmpty(password)){
-                    Toast.makeText(SignUpActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(TextUtils.isEmpty(passwordConfirm)){
-                    Toast.makeText(SignUpActivity.this, "Confirm password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                mAuth.createUserWithEmailAndPassword(email, password) //todo put the confirmPassword into the function
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    FirebaseUser user = mAuth.getCurrentUser();
-
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-
-                                }
-                            }
-                        });
-
-
+            if(TextUtils.isEmpty(email)){
+                Toast.makeText(SignUpActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            if(TextUtils.isEmpty(password)){
+                Toast.makeText(SignUpActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(TextUtils.isEmpty(passwordConfirm)){
+                Toast.makeText(SignUpActivity.this, "Confirm password", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            mAuth.createUserWithEmailAndPassword(email, password) //todo put the confirmPassword into the function
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Toast.makeText(SignUpActivity.this, "Authentication was Successful.",
+                                        Toast.LENGTH_SHORT).show();
+                                FirebaseUser user = mAuth.getCurrentUser();
+
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
+
+
         });
 
     }
