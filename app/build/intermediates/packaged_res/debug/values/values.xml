@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="Signup"/>
+    <string name="app_name">Tour Guide</string>
+    <string name="click_to_login">click_to_login</string>
+    <string name="email">email</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <style name="Base.Theme.TourGuide" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.TourGuide" parent="Base.Theme.TourGuide"/>
+</resources>
