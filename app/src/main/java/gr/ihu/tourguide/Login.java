@@ -2,25 +2,16 @@ package gr.ihu.tourguide;
 
 import static android.app.ProgressDialog.show;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -30,7 +21,7 @@ public class Login extends AppCompatActivity {
     Button buttonSignup;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
-    TextView textView;
+
 
     @Override
     public void onStart() {
@@ -56,11 +47,16 @@ public class Login extends AppCompatActivity {
         buttonSignup = findViewById(R.id.signup_button);
         progressBar = findViewById(R.id.progressBar);
 
-        textView.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), Login.class);
-            startActivity(intent);
-            finish();
+        buttonSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
+
+
         buttonLogin.setOnClickListener(view -> {
             progressBar.setVisibility(View.VISIBLE);
             String email,password;

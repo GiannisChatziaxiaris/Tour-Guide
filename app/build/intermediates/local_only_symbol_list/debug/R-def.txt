@@ -15,7 +15,7 @@ id email
 id ic_gps
 id ic_magnify
 id input_search
-id loginRedirectText
+id login_button
 id map
 id password
 id progressBar

@@ -1,7 +1,4 @@
-package gr.ihu.tourguide.View;
-
-import gr.ihu.tourguide.R;
-import gr.ihu.tourguide.interfaces.IntView;
+package gr.ihu.tourguide;
 
 import com.google.android.gms.location.places.Places;
 import android.content.pm.PackageManager;
@@ -15,7 +12,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +26,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

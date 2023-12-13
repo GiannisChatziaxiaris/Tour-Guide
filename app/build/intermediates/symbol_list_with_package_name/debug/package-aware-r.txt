@@ -3771,7 +3771,7 @@ id line3
 id linear
 id listMode
 id list_item
-id loginRedirectText
+id login_button
 id m3_side_sheet
 id map
 id marquee

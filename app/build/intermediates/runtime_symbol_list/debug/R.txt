@@ -3770,7 +3770,7 @@ int id line3 0x7f0800fa
 int id linear 0x7f0800fb
 int id listMode 0x7f0800fc
 int id list_item 0x7f0800fd
-int id loginRedirectText 0x7f0800fe
+int id login_button 0x7f0800fe
 int id m3_side_sheet 0x7f0800ff
 int id map 0x7f080100
 int id marquee 0x7f080101
