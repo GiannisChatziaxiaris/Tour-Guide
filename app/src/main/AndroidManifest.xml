@@ -31,10 +31,10 @@
             android:value="@integer/google_play_services_version"/>
 
         <activity
-            android:name=".Login"
-            android:exported="false" />
-        <activity
             android:name=".SignUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
