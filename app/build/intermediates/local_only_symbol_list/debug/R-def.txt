@@ -34,8 +34,14 @@ string Signup
 string app_name
 string click_to_login
 string email
+string gcm_defaultSenderId
+string google_api_key
+string google_app_id
+string google_crash_reporting_api_key
+string google_storage_bucket
 string login
 string password
+string project_id
 style Base.Theme.TourGuide
 style Theme.TourGuide
 xml backup_rules
