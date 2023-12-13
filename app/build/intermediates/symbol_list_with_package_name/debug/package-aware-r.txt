@@ -3624,6 +3624,7 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id btn_login
 id buttonPanel
+id button_logout
 id cache_measures
 id callMeasure
 id cancel_button

@@ -258,18 +258,18 @@ MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\user
 		ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:31:13-66
 	android:name
 		ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:30:13-58
-activity#gr.ihu.tourguide.Login
-ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:33:9-35:40
-	android:exported
-		ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:35:13-37
-	android:name
-		ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:34:13-34
 activity#gr.ihu.tourguide.SignUpActivity
+ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:33:9-35:39
+	android:exported
+		ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:35:13-36
+	android:name
+		ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:34:13-43
+activity#gr.ihu.tourguide.Login
 ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:36:9-44:20
 	android:exported
 		ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:38:13-36
 	android:name
-		ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:37:13-43
+		ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:37:13-34
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:39:13-43:29
 action#android.intent.action.MAIN

@@ -98,15 +98,15 @@
 55-->C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:31:13-66
 56
 57        <activity
-57-->C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:33:9-35:40
-58            android:name="gr.ihu.tourguide.Login"
-58-->C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:34:13-34
-59            android:exported="false" />
-59-->C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:35:13-37
+57-->C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:33:9-35:39
+58            android:name="gr.ihu.tourguide.SignUpActivity"
+58-->C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:34:13-43
+59            android:exported="true" />
+59-->C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:35:13-36
 60        <activity
 60-->C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:36:9-44:20
-61            android:name="gr.ihu.tourguide.SignUpActivity"
-61-->C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:37:13-43
+61            android:name="gr.ihu.tourguide.Login"
+61-->C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:37:13-34
 62            android:exported="true" >
 62-->C:\Users\userx\AndroidStudioProjects\Tour-Guide\app\src\main\AndroidManifest.xml:38:13-36
 63            <intent-filter>

@@ -1,6 +1,8 @@
 package gr.ihu.tourguide;
 
 import com.google.android.gms.location.places.Places;
+
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +38,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 import android.Manifest;
 
@@ -67,6 +71,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         }
     }
+    Button logoutButton;
+    FirebaseAuth mAuth;
+
+
+
     private static final String TAG = "MapActivity";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -100,7 +109,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mGps = (ImageView)  findViewById(R.id.ic_gps);
         getLocationPermission();
 
+        logoutButton = findViewById(R.id.button_logout);
+        mAuth = FirebaseAuth.getInstance();
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(),Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
+
+
 
     private void init(){
         Log.d(TAG,"init: initializing");

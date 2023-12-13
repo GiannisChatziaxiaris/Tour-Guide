@@ -11,6 +11,7 @@ drawable ic_launcher_foreground
 drawable ic_magnify
 drawable white_border
 id btn_login
+id button_logout
 id email
 id ic_gps
 id ic_magnify
