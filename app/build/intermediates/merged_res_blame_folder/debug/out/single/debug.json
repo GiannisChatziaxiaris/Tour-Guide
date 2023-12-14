@@ -40,8 +40,8 @@
         "source": "C:\\Users\\userx\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\xml\\data_extraction_rules.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/layout_activity_map.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/layout/activity_map.xml"
+        "merged": "gr.ihu.tourguide.app-merged_res-38:/layout_activity_profile.xml.flat",
+        "source": "gr.ihu.tourguide.app-main-40:/layout/activity_profile.xml"
     },
     {
         "merged": "C:\\Users\\userx\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-hdpi_ic_gps.png.flat",
@@ -90,6 +90,10 @@
     {
         "merged": "C:\\Users\\userx\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\layout_activity_sign_up.xml.flat",
         "source": "C:\\Users\\userx\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\layout\\activity_sign_up.xml"
+    },
+    {
+        "merged": "C:\\Users\\userx\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\layout_activity_profile.xml.flat",
+        "source": "C:\\Users\\userx\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\layout\\activity_profile.xml"
     },
     {
         "merged": "C:\\Users\\userx\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-mdpi_ic_magnify.png.flat",

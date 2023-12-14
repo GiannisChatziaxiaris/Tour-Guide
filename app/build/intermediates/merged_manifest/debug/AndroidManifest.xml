@@ -47,6 +47,10 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.TourGuide" >
+        <activity
+            android:name="gr.ihu.tourguide.ProfileActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCl6nj0F5etwgSVzSHvo8WTO0aClG3b9XE" />
@@ -66,10 +70,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="gr.ihu.tourguide.MapActivity" >
-        </activity>
-        <activity android:name="gr.ihu.tourguide.MainActivity" >
-        </activity>
+        <activity android:name="gr.ihu.tourguide.MapActivity" />
+        <activity android:name="gr.ihu.tourguide.MainActivity" />
         <activity
             android:name="com.google.android.libraries.places.widget.AutocompleteActivity"
             android:exported="false"

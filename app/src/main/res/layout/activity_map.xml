@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -13,7 +14,8 @@
         android:layout_height="match_parent"
         tools:context=".MapsActivity"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp"
+    />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,20 +53,22 @@
             android:id="@+id/ic_gps"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@id/button_profile"
             android:layout_marginRight="1dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_gps" />
 
         <Button
-            android:id="@+id/button_logout"
+            android:id="@+id/button_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Profile"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="42dp"
-            android:text="Logout" />
+            />
+
 
     </RelativeLayout>
+
 
 
 

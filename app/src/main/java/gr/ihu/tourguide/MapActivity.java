@@ -71,7 +71,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         }
     }
-    Button logoutButton;
+    Button profileButton;
     FirebaseAuth mAuth;
 
 
@@ -109,15 +109,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mGps = (ImageView)  findViewById(R.id.ic_gps);
         getLocationPermission();
 
-        logoutButton = findViewById(R.id.button_logout);
+        profileButton = findViewById(R.id.button_profile);
         mAuth = FirebaseAuth.getInstance();
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(),Login.class);
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 

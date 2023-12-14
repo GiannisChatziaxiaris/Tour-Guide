@@ -12,6 +12,7 @@ drawable ic_magnify
 drawable white_border
 id btn_login
 id button_logout
+id button_profile
 id email
 id ic_gps
 id ic_magnify
@@ -25,9 +26,11 @@ id signup_button
 id signup_email
 id signup_password
 id signup_password_confirm
+id user_details
 layout activity_login
 layout activity_main
 layout activity_map
+layout activity_profile
 layout activity_sign_up
 mipmap ic_launcher
 mipmap ic_launcher_round
