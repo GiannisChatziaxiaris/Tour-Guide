@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".View.SignUpActivity">
+    tools:context=".SignUpActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,19 +62,15 @@
                 android:layout_height="70dp"
                 android:layout_marginTop="30dp"
                 android:text="Sign Up"
-                android:textSize="18dp"></Button>
+                android:textSize="18sp"></Button>
 
-            <TextView
-                android:id="@+id/loginRedirectText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:padding="8dp"
-                android:text="Already an user? Login"
-                android:textSize="18dp">
-
-            </TextView>
+            <Button
+                android:id="@+id/login_button"
+                android:text="@string/login"
+                android:layout_width="350dp"
+                android:layout_height="70dp"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"></Button>
 
 
         </LinearLayout>

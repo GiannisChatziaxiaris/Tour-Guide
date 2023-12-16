@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -9,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "gr.ihu.tourguide"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -45,5 +46,6 @@ dependencies {
     implementation ("com.google.firebase:firebase-database:20.0.2")
     implementation ("com.google.firebase:firebase-auth:21.0.1")
     implementation ("com.google.android.material:material:1.4.0")
+    implementation ("com.google.firebase:firebase-core:16.0.6")
 
 }

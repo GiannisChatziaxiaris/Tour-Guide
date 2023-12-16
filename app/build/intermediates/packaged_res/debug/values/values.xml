@@ -6,8 +6,14 @@
     <string name="app_name">Tour Guide</string>
     <string name="click_to_login">click_to_login</string>
     <string name="email">email</string>
+    <string name="gcm_defaultSenderId" translatable="false">1046872669382</string>
+    <string name="google_api_key" translatable="false">AIzaSyA7AkMyca2a80-tCFsKBKI1RnvR4eg1-T0</string>
+    <string name="google_app_id" translatable="false">1:1046872669382:android:64dccc886d12726f39ebc7</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA7AkMyca2a80-tCFsKBKI1RnvR4eg1-T0</string>
+    <string name="google_storage_bucket" translatable="false">project-database-42bd5.appspot.com</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
+    <string name="project_id" translatable="false">project-database-42bd5</string>
     <style name="Base.Theme.TourGuide" parent="Theme.Material3.DayNight.NoActionBar">
         
         

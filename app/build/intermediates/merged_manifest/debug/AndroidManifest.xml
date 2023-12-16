@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="26"
-        android:targetSdkVersion="33" />
+        android:targetSdkVersion="34" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -23,6 +23,10 @@
         <!-- Needs to be explicitly declared on Android R+ -->
         <package android:name="com.google.android.apps.maps" />
     </queries>
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission
         android:name="gr.ihu.tourguide.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
@@ -43,6 +47,10 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.TourGuide" >
+        <activity
+            android:name="gr.ihu.tourguide.ProfileActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCl6nj0F5etwgSVzSHvo8WTO0aClG3b9XE" />
@@ -51,10 +59,10 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="gr.ihu.tourguide.Login"
-            android:exported="false" />
+            android:name="gr.ihu.tourguide.SignUpActivity"
+            android:exported="true" />
         <activity
-            android:name="gr.ihu.tourguide.View.MapActivity"
+            android:name="gr.ihu.tourguide.Login"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,12 +70,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- <activity -->
-        <!-- android:name=".View.MapActivity"> -->
-        <!--  -->
-        <!-- </activity> -->
-
+        <activity android:name="gr.ihu.tourguide.MapActivity" />
+        <activity android:name="gr.ihu.tourguide.MainActivity" />
         <activity
             android:name="com.google.android.libraries.places.widget.AutocompleteActivity"
             android:exported="false"
@@ -88,6 +92,12 @@
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
         </service>
 
@@ -136,6 +146,51 @@
                 <action android:name="com.google.firebase.auth.api.gms.service.START" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
+        <receiver
+            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.INSTALL_PACKAGES" >
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver
+            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
+        <!--
+             FirebaseInstanceIdService performs security checks at runtime,
+             no need for explicit permissions despite exported="true"
+        -->
+        <service
+            android:name="com.google.firebase.iid.FirebaseInstanceIdService"
+            android:exported="true" >
+            <intent-filter android:priority="-500" >
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
