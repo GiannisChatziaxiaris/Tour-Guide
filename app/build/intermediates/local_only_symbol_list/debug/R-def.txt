@@ -10,6 +10,7 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_magnify
 drawable white_border
+id autocomplete_fragment
 id btn_login
 id button_logout
 id button_profile

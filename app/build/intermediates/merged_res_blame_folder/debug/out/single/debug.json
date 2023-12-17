@@ -1,47 +1,59 @@
 [
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable-anydpi_ic_magnify.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/drawable-anydpi/ic_magnify.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-mdpi_ic_gps.png.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable-mdpi\\ic_gps.png"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/layout_activity_main.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/layout/activity_main.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable_baseline_lock_24.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable\\baseline_lock_24.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable-mdpi_ic_magnify.png.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/drawable-mdpi/ic_magnify.png"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-hdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable-xxhdpi_ic_magnify.png.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/drawable-xxhdpi/ic_magnify.png"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-mdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-anydpi_ic_gps.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable-anydpi\\ic_gps.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\xml\\data_extraction_rules.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\layout\\activity_main.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable_white_border.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/drawable/white_border.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/layout_activity_map.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/layout/activity_map.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\xml\\backup_rules.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/layout_activity_profile.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/layout/activity_profile.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-xxhdpi_ic_gps.png.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable-xxhdpi\\ic_gps.png"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable_baseline_password_24.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/drawable/baseline_password_24.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-xhdpi_ic_gps.png.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable-xhdpi\\ic_gps.png"
+    },
+    {
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
     },
     {
         "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable-mdpi_ic_gps.png.flat",
@@ -52,111 +64,119 @@
         "source": "gr.ihu.tourguide.app-main-40:/drawable-xxhdpi/ic_gps.png"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-mdpi_ic_magnify.png.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable-mdpi\\ic_magnify.png"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/layout_activity_login.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/layout/activity_login.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-xxhdpi_ic_magnify.png.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable-xxhdpi\\ic_magnify.png"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable_baseline_lock_24.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/drawable/baseline_lock_24.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-anydpi_ic_magnify.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable-anydpi\\ic_magnify.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\layout\\activity_login.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable-xhdpi_ic_magnify.png.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/drawable-xhdpi/ic_magnify.png"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/layout_activity_sign_up.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/layout/activity_sign_up.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-xxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable_baseline_email_24.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/drawable/baseline_email_24.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-xhdpi_ic_magnify.png.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable-xhdpi\\ic_magnify.png"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-hdpi_ic_gps.png.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable-hdpi\\ic_gps.png"
+    },
+    {
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable_baseline_email_24.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable\\baseline_email_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable-hdpi_ic_magnify.png.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable-hdpi\\ic_magnify.png"
     },
     {
         "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable-anydpi_ic_gps.xml.flat",
         "source": "gr.ihu.tourguide.app-main-40:/drawable-anydpi/ic_gps.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xhdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\layout_activity_sign_up.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\layout\\activity_sign_up.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/xml_backup_rules.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/xml/backup_rules.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable-hdpi_ic_gps.png.flat",
         "source": "gr.ihu.tourguide.app-main-40:/drawable-hdpi/ic_gps.png"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable-hdpi_ic_magnify.png.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/drawable-hdpi/ic_magnify.png"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable_baseline_password_24.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable\\baseline_password_24.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-hdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\layout_activity_profile.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\layout\\activity_profile.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-mdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/xml_data_extraction_rules.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/xml/data_extraction_rules.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable_white_border.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable\\white_border.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/drawable/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable_ic_launcher_background.xml.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/drawable/ic_launcher_background.xml"
+        "merged": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-merged_res-38:\\layout_activity_map.xml.flat",
+        "source": "C:\\Users\\BIBOS\\.gradle\\daemon\\8.0\\gr.ihu.tourguide.app-main-40:\\layout\\activity_map.xml"
     },
     {
         "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable-xhdpi_ic_gps.png.flat",
         "source": "gr.ihu.tourguide.app-main-40:/drawable-xhdpi/ic_gps.png"
-    },
-    {
-        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xhdpi/ic_launcher_round.webp"
     }
 ]
