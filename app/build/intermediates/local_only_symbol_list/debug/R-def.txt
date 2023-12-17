@@ -33,6 +33,7 @@ layout activity_map
 layout activity_profile
 layout activity_sign_up
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 string Signup
 string app_name

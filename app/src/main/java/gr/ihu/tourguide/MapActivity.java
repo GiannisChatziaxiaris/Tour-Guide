@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,12 +47,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
-        GoogleApiClient.OnConnectionFailedListener{
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback{
 
-    }
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
@@ -89,15 +86,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     //widgets
-    private AutoCompleteTextView mSearchText;
+    private EditText mSearchText;
     private ImageView mGps;
 
     //vars
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private gr.ihu.tourguide.View.PlaceAutocompleteAdapter mPlaceAutoCompleteAdapter;
-    private GoogleApiClient mGoogleApiClient;
+
 
 
 
@@ -105,7 +101,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        mSearchText = (AutoCompleteTextView) findViewById(R.id.input_search);
+        mSearchText = (EditText) findViewById(R.id.input_search);
         mGps = (ImageView)  findViewById(R.id.ic_gps);
         getLocationPermission();
 
@@ -122,21 +118,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     }
 
-
-
     private void init(){
         Log.d(TAG,"init: initializing");
-        mGoogleApiClient = new GoogleApiClient
-                .Builder(this)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .enableAutoManage(this, this)
-                .build();
-
-        mPlaceAutoCompleteAdapter = new gr.ihu.tourguide.View.PlaceAutocompleteAdapter(this, mGoogleApiClient ,
-                LAT_LNG_BOUNDS,null);
-
-        mSearchText.setAdapter(mPlaceAutoCompleteAdapter);
 
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

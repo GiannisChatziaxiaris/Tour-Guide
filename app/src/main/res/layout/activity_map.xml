@@ -37,7 +37,7 @@
             android:src="@drawable/ic_magnify"/>
 
 
-        <AutoCompleteTextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/ic_magnify"

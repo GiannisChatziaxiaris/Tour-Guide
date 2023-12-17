@@ -715,6 +715,7 @@ gr.ihu.tourguide:string/abc_action_mode_done = 0x7f100004
 gr.ihu.tourguide:string/abc_action_menu_overflow_description = 0x7f100003
 gr.ihu.tourguide:string/abc_action_bar_up_description = 0x7f100002
 gr.ihu.tourguide:plurals/mtrl_badge_content_description = 0x7f0e0000
+gr.ihu.tourguide:mipmap/ic_launcher_foreground = 0x7f0d0001
 gr.ihu.tourguide:macro/m3_sys_color_dark_surface_tint = 0x7f0c0175
 gr.ihu.tourguide:macro/m3_comp_top_app_bar_small_leading_icon_color = 0x7f0c0173
 gr.ihu.tourguide:macro/m3_comp_top_app_bar_small_headline_color = 0x7f0c0171
@@ -1785,7 +1786,7 @@ gr.ihu.tourguide:style/MaterialAlertDialog.MaterialComponents.Title.Icon.CenterS
 gr.ihu.tourguide:dimen/mtrl_progress_circular_track_thickness_small = 0x7f0602da
 gr.ihu.tourguide:style/Widget.MaterialComponents.BottomAppBar = 0x7f1103f0
 gr.ihu.tourguide:style/ThemeOverlay.Material3.AutoCompleteTextView.FilledBox.Dense = 0x7f110286
-gr.ihu.tourguide:mipmap/ic_launcher_round = 0x7f0d0001
+gr.ihu.tourguide:mipmap/ic_launcher_round = 0x7f0d0002
 gr.ihu.tourguide:dimen/mtrl_progress_circular_track_thickness_medium = 0x7f0602d9
 gr.ihu.tourguide:dimen/mtrl_progress_circular_size_small = 0x7f0602d7
 gr.ihu.tourguide:attr/lineHeight = 0x7f0302c7

@@ -92,6 +92,14 @@
         "source": "gr.ihu.tourguide.app-main-40:/drawable-anydpi/ic_gps.xml"
     },
     {
+        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+    },
+    {
         "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
         "source": "gr.ihu.tourguide.app-main-40:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
@@ -116,8 +124,20 @@
         "source": "gr.ihu.tourguide.app-main-40:/drawable-hdpi/ic_magnify.png"
     },
     {
+        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "gr.ihu.tourguide.app-main-40:/mipmap-hdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "gr.ihu.tourguide.app-main-40:/mipmap-mdpi/ic_launcher_foreground.webp"
+    },
+    {
         "merged": "gr.ihu.tourguide.app-merged_res-38:/xml_data_extraction_rules.xml.flat",
         "source": "gr.ihu.tourguide.app-main-40:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "gr.ihu.tourguide.app-merged_res-38:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "gr.ihu.tourguide.app-main-40:/mipmap-xxhdpi/ic_launcher_foreground.webp"
     },
     {
         "merged": "gr.ihu.tourguide.app-merged_res-38:/drawable_ic_launcher_foreground.xml.flat",
