@@ -142,7 +142,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 getDeviceLocation();
             }
         });
+        ImageView magnifyIcon = findViewById(R.id.ic_magnify);
+        magnifyIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                geoLocate();
+            }
+        });
         hideSoftKeyboard();
     }
     private void geoLocate(){
