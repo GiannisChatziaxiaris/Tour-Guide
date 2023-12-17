@@ -3625,6 +3625,7 @@ id browser_actions_menu_view
 id btn_login
 id buttonPanel
 id button_logout
+id button_profile
 id cache_measures
 id callMeasure
 id cancel_button
@@ -4047,6 +4048,7 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id user_details
 id vertical_only
 id view_offset_helper
 id view_transition
@@ -4184,6 +4186,7 @@ layout abc_tooltip
 layout activity_login
 layout activity_main
 layout activity_map
+layout activity_profile
 layout activity_sign_up
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
