@@ -10,6 +10,7 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_magnify
 drawable white_border
+id backButton
 id btn_login
 id button_logout
 id button_profile
@@ -17,6 +18,7 @@ id email
 id ic_gps
 id ic_magnify
 id input_search
+id locationDetailTextView
 id login_button
 id map
 id password
@@ -27,12 +29,14 @@ id signup_email
 id signup_password
 id signup_password_confirm
 id user_details
+layout activity_location_detail
 layout activity_login
 layout activity_main
 layout activity_map
 layout activity_profile
 layout activity_sign_up
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 string Signup
 string app_name
