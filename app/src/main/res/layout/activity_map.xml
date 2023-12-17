@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,56 +14,56 @@
         tools:context=".MapsActivity"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
-    />
+        android:elevation="5dp"
+        />
 
     <RelativeLayout
+        android:id="@+id/relLayout1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:elevation="10dp"
         android:background="@drawable/white_border"
-        android:id="@+id/relLayout1">
+        android:elevation="10dp">
 
 
         <ImageView
+            android:id="@+id/ic_magnify"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:id="@+id/ic_magnify"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_magnify"/>
+            android:src="@drawable/ic_magnify" />
 
 
         <EditText
+            android:id="@+id/input_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/ic_magnify"
             android:layout_centerVertical="true"
-            android:textSize="15sp"
-            android:textColor="#000"
-            android:id="@+id/input_search"
+            android:layout_toRightOf="@+id/ic_magnify"
             android:background="@null"
             android:hint="Enter Address, City or Zip Code"
-            />
+            android:textColor="#000"
+            android:textSize="15sp" />
 
         <ImageView
             android:id="@+id/ic_gps"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_toLeftOf="@id/button_profile"
             android:layout_marginRight="1dp"
+            android:layout_toLeftOf="@id/button_profile"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_gps" />
+
 
         <Button
             android:id="@+id/button_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile"
             android:layout_alignParentRight="true"
-            />
+            android:text="Profile" />
 
 
     </RelativeLayout>
@@ -74,5 +73,17 @@
         android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/ic_information"
+        android:layout_width="30dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="364dp"
+        android:layout_marginBottom="556dp"
+        android:elevation="10dp"
+        android:src="@drawable/ic_information"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
