@@ -92,12 +92,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     //widgets
     private EditText mSearchText;
     private ImageView mGps;
+    private ImageView detailsButton;
 
     //vars
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-
+    private String modifiedText = "";
 
 
 
@@ -110,6 +111,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         getLocationPermission();
         Places.initialize(getApplicationContext(), "AIzaSyCl6nj0F5etwgSVzSHvo8WTO0aClG3b9XE");
         profileButton = findViewById(R.id.button_profile);
+        detailsButton = findViewById(R.id.ic_information);
         mAuth = FirebaseAuth.getInstance();
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,9 +178,23 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         magnifyIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Get the text from the EditText
+                String searchText = mSearchText.getText().toString();
 
+                // Replace spaces with underscores for wikipedia api
+                modifiedText = searchText.replace(" ", "_");
+                Log.d("searchTEXT", searchText);
                 geoLocate();
             }
+        });
+        detailsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MapActivity.this, LocationDetailActivity.class);
+                intent.putExtra("locationKeyword", modifiedText); // Replace with your keyword
+                startActivity(intent);
+            }
+
         });
         hideSoftKeyboard();
     }
