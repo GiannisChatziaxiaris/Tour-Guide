@@ -1,7 +1,5 @@
 package gr.ihu.tourguide;
 
-import com.google.android.gms.location.places.Places;
-
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -15,6 +13,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +26,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,20 +38,21 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 import android.Manifest;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
-        GoogleApiClient.OnConnectionFailedListener{
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback{
 
-    }
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
@@ -89,15 +90,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     //widgets
-    private AutoCompleteTextView mSearchText;
+    private EditText mSearchText;
     private ImageView mGps;
 
     //vars
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private gr.ihu.tourguide.View.PlaceAutocompleteAdapter mPlaceAutoCompleteAdapter;
-    private GoogleApiClient mGoogleApiClient;
+
 
 
 
@@ -105,10 +105,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        mSearchText = (AutoCompleteTextView) findViewById(R.id.input_search);
+        mSearchText = (EditText) findViewById(R.id.input_search);
         mGps = (ImageView)  findViewById(R.id.ic_gps);
         getLocationPermission();
-
+        Places.initialize(getApplicationContext(), "AIzaSyCl6nj0F5etwgSVzSHvo8WTO0aClG3b9XE");
         profileButton = findViewById(R.id.button_profile);
         mAuth = FirebaseAuth.getInstance();
         profileButton.setOnClickListener(new View.OnClickListener() {
@@ -122,21 +122,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     }
 
-
-
     private void init(){
         Log.d(TAG,"init: initializing");
-        mGoogleApiClient = new GoogleApiClient
-                .Builder(this)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .enableAutoManage(this, this)
-                .build();
-
-        mPlaceAutoCompleteAdapter = new gr.ihu.tourguide.View.PlaceAutocompleteAdapter(this, mGoogleApiClient ,
-                LAT_LNG_BOUNDS,null);
-
-        mSearchText.setAdapter(mPlaceAutoCompleteAdapter);
 
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -152,6 +139,32 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 return false;
             }
         });
+
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+        // Specify the types of place data to return.
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                LatLng selectedPlaceLatLng = place.getLatLng();
+                if (selectedPlaceLatLng != null) {
+                    moveCamera(selectedPlaceLatLng, DEFAULT_ZOOM, place.getName());
+                    Log.i(TAG, "Place details: " + place.getName() + ", " + selectedPlaceLatLng);
+                } else {
+                    Log.e(TAG, "onPlaceSelected: LatLng object is null for place " + place.getName());
+                    // Handle the case where LatLng is null (e.g., show a message to the user)
+                }
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+                // Handle the error.
+                Log.i(TAG, "An error occurred: " + status);
+            }
+        });
+
         mGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,7 +172,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 getDeviceLocation();
             }
         });
+        ImageView magnifyIcon = findViewById(R.id.ic_magnify);
+        magnifyIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                geoLocate();
+            }
+        });
         hideSoftKeyboard();
     }
     private void geoLocate(){
@@ -214,17 +234,24 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
     private void moveCamera(LatLng latLng,float zoom,String title) {
-        Log.d(TAG, "moveCameraL moving the camera to: lat:" + latLng.latitude + ",lng:" + latLng.longitude);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-
-        if(!title.equals("My Location")) {
-            MarkerOptions options = new MarkerOptions()
-                    .position(latLng)
-                    .title(title);
-            mMap.addMarker(options);
+        if (latLng == null) {
+            Log.e(TAG, "moveCamera: LatLng object is null");
+            return;
         }
-        hideSoftKeyboard();
+        if (latLng != null) {
+            Log.d(TAG, "moveCameraL moving the camera to: lat:" + latLng.latitude + ",lng:" + latLng.longitude);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
+            if(!title.equals("My Location")) {
+                MarkerOptions options = new MarkerOptions()
+                        .position(latLng)
+                        .title(title);
+                mMap.addMarker(options);
+            }
+            hideSoftKeyboard();
+        } else {
+            Log.e(TAG, "moveCamera: LatLng object is null");
+        }
     }
 
     private void initMap(){
