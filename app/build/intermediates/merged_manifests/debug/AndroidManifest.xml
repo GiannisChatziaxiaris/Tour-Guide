@@ -48,6 +48,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.TourGuide" >
         <activity
+            android:name="gr.ihu.tourguide.LocationDetailActivity"
+            android:exported="false" />
+        <activity
             android:name="gr.ihu.tourguide.ProfileActivity"
             android:exported="false" />
 
