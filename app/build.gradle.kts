@@ -47,5 +47,6 @@ dependencies {
     implementation ("com.google.firebase:firebase-auth:21.0.1")
     implementation ("com.google.android.material:material:1.4.0")
     implementation ("com.google.firebase:firebase-core:16.0.6")
+    implementation("com.google.maps:google-maps-services:0.16.0")
 
 }

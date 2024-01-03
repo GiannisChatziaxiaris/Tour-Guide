@@ -212,6 +212,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         if(list.size()>0){
             Address address = list.get(0);
             Log.d(TAG, "geolocate: found a location: " +address.toString());
+            // Get directions from current location to the searched location
+            LatLng destinationLatLng = new LatLng(address.getLatitude(), address.getLongitude());
+            LatLng originLatLng = new LatLng(mMap.getMyLocation().getLatitude(), mMap.getMyLocation().getLongitude());
+            String directionsUrl = "com.google.android.gms.location.FusedLocationProviderApi?" +
+                    "origin=" + originLatLng.latitude + "," + originLatLng.longitude +
+                    "&destination=" + destinationLatLng.latitude + "," + destinationLatLng.longitude +
+                    "&key=YOUR_GOOGLE_MAPS_API_KEY";
             //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
             moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM ,
                     address.getAddressLine(0));
@@ -299,6 +306,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
