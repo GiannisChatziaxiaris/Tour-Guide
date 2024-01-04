@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -40,6 +41,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -87,18 +90,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final  LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
             new LatLng(-40,-168), new LatLng(71, 136));
 
-
+    final List placeFields = Arrays.asList(Place.Field.NAME, Place.Field.RATING, Place.Field.OPENING_HOURS);
 
     //widgets
     private EditText mSearchText;
     private ImageView mGps;
     private ImageView detailsButton;
+    private TextView textViewRating;
+    private TextView textViewOpeningHours;
+
 
     //vars
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private String modifiedText = "";
+    private PlacesClient placesClient;
 
 
 
@@ -109,11 +116,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mSearchText = (EditText) findViewById(R.id.input_search);
         mGps = (ImageView)  findViewById(R.id.ic_gps);
         getLocationPermission();
+
+
         Places.initialize(getApplicationContext(), "AIzaSyCl6nj0F5etwgSVzSHvo8WTO0aClG3b9XE");
+        placesClient = Places.createClient(this);
         profileButton = findViewById(R.id.button_profile);
         detailsButton = findViewById(R.id.ic_information);
         mAuth = FirebaseAuth.getInstance();
         profileButton.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
@@ -126,7 +138,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void init(){
         Log.d(TAG,"init: initializing");
-
+        textViewRating = findViewById(R.id.textViewRating);
+        textViewOpeningHours = findViewById(R.id.textViewOpeningHours);
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
@@ -154,11 +167,49 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 if (selectedPlaceLatLng != null) {
                     moveCamera(selectedPlaceLatLng, DEFAULT_ZOOM, place.getName());
                     Log.i(TAG, "Place details: " + place.getName() + ", " + selectedPlaceLatLng);
+
+                    String placeId = place.getId();
+                    getPlaceDetails(placeId);
+
                 } else {
                     Log.e(TAG, "onPlaceSelected: LatLng object is null for place " + place.getName());
                     // Handle the case where LatLng is null (e.g., show a message to the user)
                 }
             }
+
+
+            // Add this method to get place details using the place ID
+            private void getPlaceDetails(String placeId) {
+                // Use the PlacesClient to get details for the selected place
+                FetchPlaceRequest request = FetchPlaceRequest.newInstance(placeId, placeFields);
+
+                placesClient.fetchPlace(request).addOnSuccessListener((response) -> {
+                    Place place = response.getPlace();
+
+                    if (place.getRating() != null) {
+                        textViewRating.setText("Rating: " + place.getRating());
+                    } else {
+                        textViewRating.setText("Rating not available");
+                    }
+
+                    if (place.getOpeningHours() != null) {
+                        textViewOpeningHours.setText("Opening Hours: " + place.getOpeningHours());
+                    } else {
+                        textViewOpeningHours.setText("Opening hours not available");
+                    }
+
+                    // Now you can use the details from the Place object
+                    Log.i(TAG, "Place details: " + place.getName() + ", Rating: " + place.getRating() + ", Opening Hours: " + place.getOpeningHours());
+                }).addOnFailureListener((exception) -> {
+                    if (exception instanceof ApiException) {
+                        ApiException apiException = (ApiException) exception;
+                        int statusCode = apiException.getStatusCode();
+                        Log.e(TAG, "Place not found: " + exception.getMessage() + ", Status code: " + statusCode);
+                    }
+                });
+            }
+
+
 
             @Override
             public void onError(@NonNull Status status) {
@@ -196,6 +247,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
 
         });
+
+
         hideSoftKeyboard();
     }
     private void geoLocate(){
