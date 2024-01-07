@@ -110,12 +110,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private String modifiedText = "";
 
+    private TextView textViewDistance;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        textViewDistance = findViewById(R.id.textViewDistance);
         mSearchText = (EditText) findViewById(R.id.input_search);
         mGps = (ImageView)  findViewById(R.id.ic_gps);
         getLocationPermission();
@@ -131,7 +133,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             }
         });
-
+        init();
     }
 
     private void init(){
@@ -256,8 +258,36 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                 for (List<HashMap<String, String>> path : routes) {
                     PolylineOptions lineOptions = new PolylineOptions();
+                    double totalDistance = 0.0;
 
-                    for (HashMap<String, String> point : path) {
+                    for (int i = 0; i < path.size(); i++) {
+                        HashMap<String, String> point = path.get(i);
+
+                        if (i == 0) {
+                            // Start marker
+                            double lat = Double.parseDouble(point.get("lat"));
+                            double lng = Double.parseDouble(point.get("lng"));
+                            LatLng position = new LatLng(lat, lng);
+                            mMap.addMarker(new MarkerOptions().position(position).title("Start"));
+                        } else if (i == path.size() - 1) {
+                            // End marker
+                            double lat = Double.parseDouble(point.get("lat"));
+                            double lng = Double.parseDouble(point.get("lng"));
+                            LatLng position = new LatLng(lat, lng);
+                            mMap.addMarker(new MarkerOptions().position(position).title("End"));
+                        }
+
+                        if (i > 0) {
+                            // Calculate distance between consecutive points
+                            HashMap<String, String> prevPoint = path.get(i - 1);
+                            totalDistance += distance(
+                                    Double.parseDouble(prevPoint.get("lat")),
+                                    Double.parseDouble(prevPoint.get("lng")),
+                                    Double.parseDouble(point.get("lat")),
+                                    Double.parseDouble(point.get("lng"))
+                            );
+                        }
+
                         double lat = Double.parseDouble(point.get("lat"));
                         double lng = Double.parseDouble(point.get("lng"));
                         LatLng position = new LatLng(lat, lng);
@@ -267,10 +297,28 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     lineOptions.width(10);
                     lineOptions.color(Color.BLUE);
                     mMap.addPolyline(lineOptions);
+
+                    // Display the total distance in kilometers
+                    String distanceText = "Total Distance: " + String.format("%.2f", totalDistance) + " km";
+                    textViewDistance.setText(distanceText);
+                    Toast.makeText(MapActivity.this, distanceText, Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Log.e(TAG, "Error downloading directions data: " + result);
             }
+        }
+
+
+        // Helper method to calculate distance between two points in kilometers
+        private double distance(double lat1, double lon1, double lat2, double lon2) {
+            double theta = lon1 - lon2;
+            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) +
+                    Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
+            dist = Math.acos(dist);
+            dist = Math.toDegrees(dist);
+            dist = dist * 60 * 1.1515;
+            dist = dist * 1.609344; // Convert distance from miles to kilometers
+            return dist;
         }
     }
     private String getDirectionsUrl(LatLng origin, LatLng dest) {

@@ -68,6 +68,18 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/textViewDistance"
+        android:layout_width="138dp"
+        android:layout_height="213dp"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:text=""
+        android:textSize="16sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="290dp" />
+
     <fragment
         android:id="@+id/autocomplete_fragment"
         android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
