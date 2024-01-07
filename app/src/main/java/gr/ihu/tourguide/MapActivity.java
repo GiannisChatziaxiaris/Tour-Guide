@@ -1,5 +1,7 @@
 package gr.ihu.tourguide;
 
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -17,6 +19,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.HashMap;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +42,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
@@ -45,6 +52,9 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.google.firebase.auth.FirebaseAuth;
 
 import android.Manifest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -198,34 +208,77 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
         hideSoftKeyboard();
     }
-    private void geoLocate(){
-        Log.d(TAG," geolocate: geolocating");
+
+
+    private void geoLocate() {
         String searchString = mSearchText.getText().toString();
         Geocoder geocoder = new Geocoder(MapActivity.this);
         List<Address> list = new ArrayList<>();
         try {
-            list = geocoder.getFromLocationName(searchString,1);
-
-        }catch(IOException e){
-            Log.e(TAG,"geoLocate: IOExpection:" + e.getMessage() );
+            list = geocoder.getFromLocationName(searchString, 1);
+        } catch (IOException e) {
+            Log.e(TAG, "geoLocate: IOException:" + e.getMessage());
         }
-        if(list.size()>0){
+
+        if (list.size() > 0) {
             Address address = list.get(0);
-            Log.d(TAG, "geolocate: found a location: " +address.toString());
-            // Get directions from current location to the searched location
             LatLng destinationLatLng = new LatLng(address.getLatitude(), address.getLongitude());
             LatLng originLatLng = new LatLng(mMap.getMyLocation().getLatitude(), mMap.getMyLocation().getLongitude());
-            String directionsUrl = "com.google.android.gms.location.FusedLocationProviderApi?" +
-                    "origin=" + originLatLng.latitude + "," + originLatLng.longitude +
-                    "&destination=" + destinationLatLng.latitude + "," + destinationLatLng.longitude +
-                    "&key=YOUR_GOOGLE_MAPS_API_KEY";
-            //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
-            moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM ,
-                    address.getAddressLine(0));
 
+            String directionsUrl = getDirectionsUrl(originLatLng, destinationLatLng);
+            FetchDirectionsTask fetchDirectionsTask = new FetchDirectionsTask();
+            fetchDirectionsTask.execute(directionsUrl);
+
+            moveCamera(destinationLatLng, DEFAULT_ZOOM, address.getAddressLine(0));
         }
     }
+    private class FetchDirectionsTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... url) {
+            try {
+                FetchUrlHelper fetchUrlHelper = new FetchUrlHelper();
+                return fetchUrlHelper.downloadUrl(url[0]);
+            } catch (Exception e) {
+                return "Exception: " + e.getMessage();
+            }
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (!result.startsWith("Exception")) {
+                DirectionsJSONParser directionsParser = new DirectionsJSONParser();
+                List<List<HashMap<String, String>>> routes = null;
+                try {
+                    routes = directionsParser.parse(new JSONObject(result));
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
 
+                for (List<HashMap<String, String>> path : routes) {
+                    PolylineOptions lineOptions = new PolylineOptions();
+
+                    for (HashMap<String, String> point : path) {
+                        double lat = Double.parseDouble(point.get("lat"));
+                        double lng = Double.parseDouble(point.get("lng"));
+                        LatLng position = new LatLng(lat, lng);
+                        lineOptions.add(position);
+                    }
+
+                    lineOptions.width(10);
+                    lineOptions.color(Color.BLUE);
+                    mMap.addPolyline(lineOptions);
+                }
+            } else {
+                Log.e(TAG, "Error downloading directions data: " + result);
+            }
+        }
+    }
+    private String getDirectionsUrl(LatLng origin, LatLng dest) {
+        return "https://maps.googleapis.com/maps/api/directions/json?" +
+                "origin=" + origin.latitude + "," + origin.longitude +
+                "&destination=" + dest.latitude + "," + dest.longitude +
+                "&key=AIzaSyCl6nj0F5etwgSVzSHvo8WTO0aClG3b9XE";
+    }
 
     private void getDeviceLocation(){
         Log.d(TAG,"getDeviceLocation: getting the devices current location");
@@ -307,7 +360,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -338,4 +390,3 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
 }
-
