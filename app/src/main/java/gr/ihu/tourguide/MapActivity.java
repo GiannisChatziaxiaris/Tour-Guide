@@ -200,7 +200,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
     private void geoLocate(){
         Log.d(TAG," geolocate: geolocating");
-        String searchString = mSearchText.getText().toString();
+        // String searchString = mSearchText.getText().toString();
+        String searchString = "museum";
         Geocoder geocoder = new Geocoder(MapActivity.this);
         List<Address> list = new ArrayList<>();
         try {
@@ -209,13 +210,23 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }catch(IOException e){
             Log.e(TAG,"geoLocate: IOExpection:" + e.getMessage() );
         }
-        if(list.size()>0){
-            Address address = list.get(0);
-            Log.d(TAG, "geolocate: found a location: " +address.toString());
-            //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
-            moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM ,
-                    address.getAddressLine(0));
 
+        List<Address> listToDisplay = new ArrayList<>();
+        if (list.size() > 0){
+            for (int i = 0; i<list.size(); i++){
+                Address address = list.get(i);
+                //Check address
+                if (String.valueOf(address.getAddressLine(0)).contains(searchString) ||
+                        String.valueOf(address.getLocality()).contains(searchString) ||
+                        String.valueOf(address.getAdminArea()).contains(searchString) ||
+                        String.valueOf(address.getPostalCode()).contains(searchString)){
+                    listToDisplay.add(address);
+                }
+            }
+        }
+        for (int i = 0; i<listToDisplay.size(); i++){
+            moveCamera(new LatLng(listToDisplay.get(i).getLatitude(), listToDisplay.get(i).getLongitude()),DEFAULT_ZOOM ,
+                    listToDisplay.get(i).getAddressLine(0));
         }
     }
 
@@ -330,4 +341,3 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
 }
-
