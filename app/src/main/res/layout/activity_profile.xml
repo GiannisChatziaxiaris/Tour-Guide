@@ -9,18 +9,38 @@
     tools:context=".ProfileActivity">
 
     <TextView
-        android:id="@+id/user_details"
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/email">
+        android:text="Name: ">
+    </TextView>
 
+    <TextView
+        android:id="@+id/user_surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Surname: ">
+    </TextView>
+
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email: ">
     </TextView>
 
     <Button
         android:id="@+id/button_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        />
+        android:text="Logout">
+    </Button>
+    <TextView
+        android:id="@+id/search_history_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search History"
+        android:textSize="16sp"
+        android:padding="8dp"/>
 
 </LinearLayout>
