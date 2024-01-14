@@ -162,6 +162,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
+                modifiedText =place.getName();
+                geoLocate();
                 LatLng selectedPlaceLatLng = place.getLatLng();
                 if (selectedPlaceLatLng != null) {
                     moveCamera(selectedPlaceLatLng, DEFAULT_ZOOM, place.getName());
@@ -213,7 +215,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     private void geoLocate() {
-        String searchString = mSearchText.getText().toString();
+        String searchString = modifiedText;
         Geocoder geocoder = new Geocoder(MapActivity.this);
         List<Address> list = new ArrayList<>();
         try {
