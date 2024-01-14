@@ -16,19 +16,25 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    EditText editTextEmail,editTextPassword,editTextPasswordConfirm;
+    EditText editTextEmail,editTextPassword,editTextPasswordConfirm,editTextName,editTextSurname;
 
     Button signupButton, loginButton;
     FirebaseAuth mAuth;
+    FirebaseDatabase mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_sign_up);
         mAuth= FirebaseAuth.getInstance();
+        mDatabase=FirebaseDatabase.getInstance("https://project-database-42bd5-default-rtdb.europe-west1.firebasedatabase.app/");
+        editTextName  = findViewById(R.id.signup_name);
+        editTextSurname = findViewById(R.id.signup_surname);
         editTextEmail = findViewById(R.id.signup_email);
         editTextPassword = findViewById(R.id.signup_password);
         editTextPasswordConfirm = findViewById(R.id.signup_password_confirm);
@@ -45,11 +51,21 @@ public class SignUpActivity extends AppCompatActivity {
         ;
 
         signupButton.setOnClickListener(view -> {
-            String email,password,passwordConfirm;
+            String name,surname,email,password,passwordConfirm;
+            name = editTextName.getText().toString();
+            surname = editTextSurname.getText().toString();
             email = editTextEmail.getText().toString();
             password = editTextPassword.getText().toString();
             passwordConfirm = editTextPasswordConfirm.getText().toString();
 
+            if(TextUtils.isEmpty(name)){
+                Toast.makeText(SignUpActivity.this, "Enter name", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(TextUtils.isEmpty(surname)){
+                Toast.makeText(SignUpActivity.this, "Enter surname", Toast.LENGTH_SHORT).show();
+                return;
+            }
             if(TextUtils.isEmpty(email)){
                 Toast.makeText(SignUpActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
                 return;
@@ -64,22 +80,43 @@ public class SignUpActivity extends AppCompatActivity {
                 return;
             }
 
-            mAuth.createUserWithEmailAndPassword(email, password) //todo put the confirmPassword into the function
+            // Perform user authentication (sign-up or login)
+            mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(SignUpActivity.this, "Authentication was Successful.",
-                                    Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+
+                            Intent intent = new Intent(getApplicationContext(),MapActivity.class);
                             startActivity(intent);
                             finish();
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            // User creation successful
+                            String userID = mAuth.getCurrentUser().getUid();
 
+                            // Save user profile data to the database
+                            DatabaseReference usersRef = mDatabase.getReference().child("users").child(userID);
+
+                            User newUser = new User(name,surname, email /*other details*/);
+
+                            // Save user profile data
+                            usersRef.setValue(newUser)
+                                    .addOnCompleteListener(profileTask -> {
+                                        if (profileTask.isSuccessful()) {
+                                            // User profile data saved successfully
+
+                                            DatabaseReference searchHistoryRef = mDatabase.getReference()
+                                                    .child("search_history")
+                                                    .child(userID);
+
+                                            // Set initial search history or proceed with other operations/UI changes
+
+
+
+                                        } else {
+                                            // Failed to save user profile data
+                                        }
+                                    });
+                        } else {
+                            // User creation failed
                         }
                     });
 

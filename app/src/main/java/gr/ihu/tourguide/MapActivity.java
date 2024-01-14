@@ -13,7 +13,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,8 +29,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
+
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -47,9 +46,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import android.Manifest;
 
@@ -61,7 +64,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback{
+public class
+MapActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
@@ -84,6 +88,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
     Button profileButton;
     FirebaseAuth mAuth;
+    FirebaseDatabase mDatabase;
 
 
 
@@ -97,18 +102,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final  LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
             new LatLng(-40,-168), new LatLng(71, 136));
 
-
+    final List placeFields = Arrays.asList(Place.Field.NAME, Place.Field.RATING);
 
     //widgets
     private EditText mSearchText;
     private ImageView mGps;
     private ImageView detailsButton;
+    private TextView textViewRating;
+    private TextView textViewOpeningHours;
+
 
     //vars
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private String modifiedText = "";
+    private PlacesClient placesClient;
+    private String locationNameText = "";
 
     private TextView textViewDistance;
 
@@ -121,11 +130,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mSearchText = (EditText) findViewById(R.id.input_search);
         mGps = (ImageView)  findViewById(R.id.ic_gps);
         getLocationPermission();
+
+
         Places.initialize(getApplicationContext(), "AIzaSyCl6nj0F5etwgSVzSHvo8WTO0aClG3b9XE");
+        placesClient = Places.createClient(this);
         profileButton = findViewById(R.id.button_profile);
         detailsButton = findViewById(R.id.ic_information);
         mAuth = FirebaseAuth.getInstance();
+        mDatabase=FirebaseDatabase.getInstance("https://project-database-42bd5-default-rtdb.europe-west1.firebasedatabase.app/");
         profileButton.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
@@ -138,6 +153,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void init(){
         Log.d(TAG,"init: initializing");
+        textViewRating = findViewById(R.id.textViewRating);
 
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -161,18 +177,54 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                modifiedText =place.getName();
+            public void onPlaceSelected(@NonNull Place place) {              
+                locationNameText =place.getName();
                 geoLocate();
                 LatLng selectedPlaceLatLng = place.getLatLng();
                 if (selectedPlaceLatLng != null) {
                     moveCamera(selectedPlaceLatLng, DEFAULT_ZOOM, place.getName());
                     Log.i(TAG, "Place details: " + place.getName() + ", " + selectedPlaceLatLng);
+                    String placeId = place.getId();
+                    getPlaceDetails(placeId);
+                    String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    DatabaseReference searchHistoryRef = mDatabase.getReference().child("search_history").child(userID);
+                    // Push the searched place to Firebase
+                    searchHistoryRef.push().setValue(locationNameText);
                 } else {
                     Log.e(TAG, "onPlaceSelected: LatLng object is null for place " + place.getName());
                     // Handle the case where LatLng is null (e.g., show a message to the user)
                 }
             }
+
+
+            // Add this method to get place details using the place ID
+            private void getPlaceDetails(String placeId) {
+                // Use the PlacesClient to get details for the selected place
+                FetchPlaceRequest request = FetchPlaceRequest.newInstance(placeId, placeFields);
+
+                placesClient.fetchPlace(request).addOnSuccessListener((response) -> {
+                    Place place = response.getPlace();
+
+                    if (place.getRating() != null) {
+                        textViewRating.setText("Rating: " + place.getRating());
+                    } else {
+                        textViewRating.setText("Rating not available");
+                    }
+
+
+
+                    // Now you can use the details from the Place object
+                    Log.i(TAG, "Place details: " + place.getName() + ", Rating: " + place.getRating());
+                }).addOnFailureListener((exception) -> {
+                    if (exception instanceof ApiException) {
+                        ApiException apiException = (ApiException) exception;
+                        int statusCode = apiException.getStatusCode();
+                        Log.e(TAG, "Place not found: " + exception.getMessage() + ", Status code: " + statusCode);
+                    }
+                });
+            }
+
+
 
             @Override
             public void onError(@NonNull Status status) {
@@ -192,32 +244,31 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         magnifyIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Get the text from the EditText
-                String searchText = mSearchText.getText().toString();
-
-                // Replace spaces with underscores for wikipedia api
-                modifiedText = searchText.replace(" ", "_");
-                Log.d("searchTEXT", searchText);
                 geoLocate();
             }
         });
         detailsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
+                Log.d("locationNameText", locationNameText);
                 Intent intent = new Intent(MapActivity.this, LocationDetailActivity.class);
-                intent.putExtra("locationKeyword", modifiedText); // Replace with your keyword
+                intent.putExtra("locationKeyword", locationNameText); // Replace with your keyword
                 startActivity(intent);
             }
 
         });
+
+
         hideSoftKeyboard();
     }
 
 
     private void geoLocate() {
-        String searchString = modifiedText;
+        String searchString = locationNameText;
         Geocoder geocoder = new Geocoder(MapActivity.this);
-        List<Address> list = new ArrayList<>();
+        List<Address> list = new ArrayList<>();String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference searchHistoryRef = mDatabase.getReference().child("search_history").child(userID);
+        // Push the searched place to Firebase
+        searchHistoryRef.push().setValue(searchString);
         try {
             list = geocoder.getFromLocationName(searchString, 1);
         } catch (IOException e) {
