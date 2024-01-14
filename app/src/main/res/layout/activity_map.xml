@@ -90,11 +90,6 @@
         tools:layout_editor_absoluteX="47dp"
         tools:layout_editor_absoluteY="290dp" />
 
-    <fragment
-        android:id="@+id/autocomplete_fragment"
-        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/ic_information"
