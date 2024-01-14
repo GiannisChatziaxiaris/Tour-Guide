@@ -54,7 +54,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback{
+public class
+MapActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
@@ -90,7 +91,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final  LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
             new LatLng(-40,-168), new LatLng(71, 136));
 
-    final List placeFields = Arrays.asList(Place.Field.NAME, Place.Field.RATING, Place.Field.OPENING_HOURS);
+    final List placeFields = Arrays.asList(Place.Field.NAME, Place.Field.RATING);
 
     //widgets
     private EditText mSearchText;
@@ -139,7 +140,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void init(){
         Log.d(TAG,"init: initializing");
         textViewRating = findViewById(R.id.textViewRating);
-        textViewOpeningHours = findViewById(R.id.textViewOpeningHours);
+
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
@@ -192,14 +193,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         textViewRating.setText("Rating not available");
                     }
 
-                    if (place.getOpeningHours() != null) {
-                        textViewOpeningHours.setText("Opening Hours: " + place.getOpeningHours());
-                    } else {
-                        textViewOpeningHours.setText("Opening hours not available");
-                    }
+
 
                     // Now you can use the details from the Place object
-                    Log.i(TAG, "Place details: " + place.getName() + ", Rating: " + place.getRating() + ", Opening Hours: " + place.getOpeningHours());
+                    Log.i(TAG, "Place details: " + place.getName() + ", Rating: " + place.getRating());
                 }).addOnFailureListener((exception) -> {
                     if (exception instanceof ApiException) {
                         ApiException apiException = (ApiException) exception;
