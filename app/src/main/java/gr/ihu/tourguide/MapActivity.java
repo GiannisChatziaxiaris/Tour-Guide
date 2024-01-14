@@ -11,7 +11,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,9 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.common.ConnectionResult;
+
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -46,6 +44,8 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import android.Manifest;
 
@@ -78,6 +78,7 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
     }
     Button profileButton;
     FirebaseAuth mAuth;
+    FirebaseDatabase mDatabase;
 
 
 
@@ -105,8 +106,8 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private String modifiedText = "";
     private PlacesClient placesClient;
+    private String locationNameText = "";
 
 
 
@@ -124,6 +125,7 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
         profileButton = findViewById(R.id.button_profile);
         detailsButton = findViewById(R.id.ic_information);
         mAuth = FirebaseAuth.getInstance();
+        mDatabase=FirebaseDatabase.getInstance("https://project-database-42bd5-default-rtdb.europe-west1.firebasedatabase.app/");
         profileButton.setOnClickListener(new View.OnClickListener() {
 
 
@@ -163,15 +165,18 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public void onPlaceSelected(@NonNull Place place) {
+            public void onPlaceSelected(@NonNull Place place) {              
+                locationNameText =place.getName();              
                 LatLng selectedPlaceLatLng = place.getLatLng();
                 if (selectedPlaceLatLng != null) {
                     moveCamera(selectedPlaceLatLng, DEFAULT_ZOOM, place.getName());
                     Log.i(TAG, "Place details: " + place.getName() + ", " + selectedPlaceLatLng);
-
                     String placeId = place.getId();
                     getPlaceDetails(placeId);
-
+                    String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    DatabaseReference searchHistoryRef = mDatabase.getReference().child("search_history").child(userID);
+                    // Push the searched place to Firebase
+                    searchHistoryRef.push().setValue(locationNameText);
                 } else {
                     Log.e(TAG, "onPlaceSelected: LatLng object is null for place " + place.getName());
                     // Handle the case where LatLng is null (e.g., show a message to the user)
@@ -226,20 +231,14 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
         magnifyIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Get the text from the EditText
-                String searchText = mSearchText.getText().toString();
-
-                // Replace spaces with underscores for wikipedia api
-                modifiedText = searchText.replace(" ", "_");
-                Log.d("searchTEXT", searchText);
                 geoLocate();
             }
         });
         detailsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
+                Log.d("locationNameText", locationNameText);
                 Intent intent = new Intent(MapActivity.this, LocationDetailActivity.class);
-                intent.putExtra("locationKeyword", modifiedText); // Replace with your keyword
+                intent.putExtra("locationKeyword", locationNameText); // Replace with your keyword
                 startActivity(intent);
             }
 
@@ -252,7 +251,10 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
         Log.d(TAG," geolocate: geolocating");
         String searchString = mSearchText.getText().toString();
         Geocoder geocoder = new Geocoder(MapActivity.this);
-        List<Address> list = new ArrayList<>();
+        List<Address> list = new ArrayList<>();String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference searchHistoryRef = mDatabase.getReference().child("search_history").child(userID);
+        // Push the searched place to Firebase
+        searchHistoryRef.push().setValue(searchString);
         try {
             list = geocoder.getFromLocationName(searchString,1);
 

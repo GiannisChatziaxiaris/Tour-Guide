@@ -18,6 +18,25 @@
             android:layout_marginStart="20dp"
             android:orientation="vertical"
              android:padding="20dp">
+            <EditText
+                android:id="@+id/signup_name"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#706A6A"
+                android:drawablePadding="5dp"
+                android:hint="Name"
+                android:padding="8dp"></EditText>
+
+            <EditText
+                android:id="@+id/signup_surname"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#706A6A"
+                android:drawablePadding="5dp"
+                android:hint="Surname"
+                android:padding="8dp"></EditText>
 
         <EditText
             android:id="@+id/signup_email"
