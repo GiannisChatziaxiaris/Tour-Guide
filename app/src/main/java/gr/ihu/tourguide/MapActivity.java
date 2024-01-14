@@ -1,5 +1,7 @@
 package gr.ihu.tourguide;
 
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -16,6 +18,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.HashMap;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +41,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
@@ -48,6 +55,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import android.Manifest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -109,12 +119,14 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
     private PlacesClient placesClient;
     private String locationNameText = "";
 
+    private TextView textViewDistance;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        textViewDistance = findViewById(R.id.textViewDistance);
         mSearchText = (EditText) findViewById(R.id.input_search);
         mGps = (ImageView)  findViewById(R.id.ic_gps);
         getLocationPermission();
@@ -136,7 +148,7 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
 
             }
         });
-
+        init();
     }
 
     private void init(){
@@ -166,7 +178,8 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {              
-                locationNameText =place.getName();              
+                locationNameText =place.getName();
+                geoLocate();
                 LatLng selectedPlaceLatLng = place.getLatLng();
                 if (selectedPlaceLatLng != null) {
                     moveCamera(selectedPlaceLatLng, DEFAULT_ZOOM, place.getName());
@@ -247,30 +260,126 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
 
         hideSoftKeyboard();
     }
-    private void geoLocate(){
-        Log.d(TAG," geolocate: geolocating");
-        String searchString = mSearchText.getText().toString();
+
+
+    private void geoLocate() {
+        String searchString = locationNameText;
         Geocoder geocoder = new Geocoder(MapActivity.this);
         List<Address> list = new ArrayList<>();String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference searchHistoryRef = mDatabase.getReference().child("search_history").child(userID);
         // Push the searched place to Firebase
         searchHistoryRef.push().setValue(searchString);
         try {
-            list = geocoder.getFromLocationName(searchString,1);
-
-        }catch(IOException e){
-            Log.e(TAG,"geoLocate: IOExpection:" + e.getMessage() );
+            list = geocoder.getFromLocationName(searchString, 1);
+        } catch (IOException e) {
+            Log.e(TAG, "geoLocate: IOException:" + e.getMessage());
         }
-        if(list.size()>0){
-            Address address = list.get(0);
-            Log.d(TAG, "geolocate: found a location: " +address.toString());
-            //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
-            moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM ,
-                    address.getAddressLine(0));
 
+        if (list.size() > 0) {
+            Address address = list.get(0);
+            LatLng destinationLatLng = new LatLng(address.getLatitude(), address.getLongitude());
+            LatLng originLatLng = new LatLng(mMap.getMyLocation().getLatitude(), mMap.getMyLocation().getLongitude());
+
+            String directionsUrl = getDirectionsUrl(originLatLng, destinationLatLng);
+            FetchDirectionsTask fetchDirectionsTask = new FetchDirectionsTask();
+            fetchDirectionsTask.execute(directionsUrl);
+
+            moveCamera(destinationLatLng, DEFAULT_ZOOM, address.getAddressLine(0));
         }
     }
+    private class FetchDirectionsTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... url) {
+            try {
+                FetchUrlHelper fetchUrlHelper = new FetchUrlHelper();
+                return fetchUrlHelper.downloadUrl(url[0]);
+            } catch (Exception e) {
+                return "Exception: " + e.getMessage();
+            }
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (!result.startsWith("Exception")) {
+                DirectionsJSONParser directionsParser = new DirectionsJSONParser();
+                List<List<HashMap<String, String>>> routes = null;
+                try {
+                    routes = directionsParser.parse(new JSONObject(result));
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
 
+                for (List<HashMap<String, String>> path : routes) {
+                    PolylineOptions lineOptions = new PolylineOptions();
+                    double totalDistance = 0.0;
+
+                    for (int i = 0; i < path.size(); i++) {
+                        HashMap<String, String> point = path.get(i);
+
+                        if (i == 0) {
+                            // Start marker
+                            double lat = Double.parseDouble(point.get("lat"));
+                            double lng = Double.parseDouble(point.get("lng"));
+                            LatLng position = new LatLng(lat, lng);
+                            mMap.addMarker(new MarkerOptions().position(position).title("Start"));
+                        } else if (i == path.size() - 1) {
+                            // End marker
+                            double lat = Double.parseDouble(point.get("lat"));
+                            double lng = Double.parseDouble(point.get("lng"));
+                            LatLng position = new LatLng(lat, lng);
+                            mMap.addMarker(new MarkerOptions().position(position).title("End"));
+                        }
+
+                        if (i > 0) {
+                            // Calculate distance between consecutive points
+                            HashMap<String, String> prevPoint = path.get(i - 1);
+                            totalDistance += distance(
+                                    Double.parseDouble(prevPoint.get("lat")),
+                                    Double.parseDouble(prevPoint.get("lng")),
+                                    Double.parseDouble(point.get("lat")),
+                                    Double.parseDouble(point.get("lng"))
+                            );
+                        }
+
+                        double lat = Double.parseDouble(point.get("lat"));
+                        double lng = Double.parseDouble(point.get("lng"));
+                        LatLng position = new LatLng(lat, lng);
+                        lineOptions.add(position);
+                    }
+
+                    lineOptions.width(10);
+                    lineOptions.color(Color.BLUE);
+                    mMap.addPolyline(lineOptions);
+
+                    // Display the total distance in kilometers
+                    String distanceText = "Total Distance: " + String.format("%.2f", totalDistance) + " km";
+                    textViewDistance.setText(distanceText);
+                    Toast.makeText(MapActivity.this, distanceText, Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Log.e(TAG, "Error downloading directions data: " + result);
+            }
+        }
+
+
+        // Helper method to calculate distance between two points in kilometers
+        private double distance(double lat1, double lon1, double lat2, double lon2) {
+            double theta = lon1 - lon2;
+            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) +
+                    Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
+            dist = Math.acos(dist);
+            dist = Math.toDegrees(dist);
+            dist = dist * 60 * 1.1515;
+            dist = dist * 1.609344; // Convert distance from miles to kilometers
+            return dist;
+        }
+    }
+    private String getDirectionsUrl(LatLng origin, LatLng dest) {
+        return "https://maps.googleapis.com/maps/api/directions/json?" +
+                "origin=" + origin.latitude + "," + origin.longitude +
+                "&destination=" + dest.latitude + "," + dest.longitude +
+                "&key=AIzaSyCl6nj0F5etwgSVzSHvo8WTO0aClG3b9XE";
+    }
 
     private void getDeviceLocation(){
         Log.d(TAG,"getDeviceLocation: getting the devices current location");
@@ -382,4 +491,3 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
 
 
 }
-
