@@ -111,6 +111,9 @@
         android:layout_marginBottom="536dp"
         android:elevation="11dp"
         android:text="Rating: "
+        android:textColor="@android:color/white"
+        android:background="#003366"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
