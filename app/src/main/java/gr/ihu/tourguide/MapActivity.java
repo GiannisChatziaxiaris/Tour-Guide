@@ -265,10 +265,7 @@ MapActivity extends AppCompatActivity implements OnMapReadyCallback{
     private void geoLocate() {
         String searchString = locationNameText;
         Geocoder geocoder = new Geocoder(MapActivity.this);
-        List<Address> list = new ArrayList<>();String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference searchHistoryRef = mDatabase.getReference().child("search_history").child(userID);
-        // Push the searched place to Firebase
-        searchHistoryRef.push().setValue(searchString);
+        List<Address> list = new ArrayList<>();
         try {
             list = geocoder.getFromLocationName(searchString, 1);
         } catch (IOException e) {

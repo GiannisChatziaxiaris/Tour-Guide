@@ -16,11 +16,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//public void openLocationDetail(View view) {
-//        Intent intent = new Intent(this, LocationDetailActivity.class);
-//        intent.putExtra("locationKeyword", "Eiffel_Tower"); // Replace with your keyword
-//        startActivity(intent);
-//        }
 
 
 public class LocationDetailActivity extends AppCompatActivity {
